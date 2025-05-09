@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { monthlyYieldData } from '../../data/indiaData';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -33,7 +34,9 @@ const YieldTrend = () => {
     cotton: false
   });
   
-  const [timeframe, setTimeframe] = useState('year');
+  const [selectedYear, setSelectedYear] = useState('2024');
+  
+  const years = Array.from({ length: 25 }, (_, i) => (2024 - i).toString());
   
   const toggleCrop = (crop) => {
     setSelectedCrops(prev => ({
@@ -48,19 +51,19 @@ const YieldTrend = () => {
         <h3 className="text-lg font-semibold">Crop Yield Trends</h3>
         
         <div className="flex flex-wrap items-center gap-2">
-          <div className="flex bg-gray-100 rounded-md p-0.5">
-            <button 
-              className={`text-xs px-3 py-1 rounded ${timeframe === 'month' ? 'bg-white shadow-sm' : ''}`}
-              onClick={() => setTimeframe('month')}
-            >
-              Monthly
-            </button>
-            <button 
-              className={`text-xs px-3 py-1 rounded ${timeframe === 'year' ? 'bg-white shadow-sm' : ''}`}
-              onClick={() => setTimeframe('year')}
-            >
-              Yearly
-            </button>
+          <div className="w-32">
+            <Select defaultValue={selectedYear} onValueChange={(value) => setSelectedYear(value)}>
+              <SelectTrigger className="h-8 text-xs">
+                <SelectValue placeholder="Select Year" />
+              </SelectTrigger>
+              <SelectContent>
+                {years.map(year => (
+                  <SelectItem key={year} value={year} className="text-xs">
+                    {year}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           
           <button className="text-xs text-kisan-green font-medium">Export</button>
