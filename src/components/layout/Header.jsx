@@ -1,6 +1,8 @@
+
 import React from "react";
 import { Search, Bell, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+
 const Header = () => {
   return <header className="flex items-center justify-between px-6 py-3 bg-white border-b border-gray-200">
       <div className="flex items-center space-x-4">
@@ -15,9 +17,9 @@ const Header = () => {
       <nav className="flex items-center">
         <ul className="flex space-x-1">
           <li>
-            <a href="#" className="bg-kisan-green text-white px-4 py-2 rounded-full text-sm font-medium">
+            <Link to="/" className="bg-kisan-green text-white px-4 py-2 rounded-full text-sm font-medium">
               Dashboard
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#" className="text-gray-600 hover:text-kisan-green px-4 py-2 rounded-full text-sm font-medium">
@@ -30,8 +32,9 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <a href="#" className="text-gray-600 hover:text-kisan-green px-4 py-2 rounded-full text-sm font-medium">
-Chatbot</a>
+            <Link to="/chatbot" className="text-gray-600 hover:text-kisan-green px-4 py-2 rounded-full text-sm font-medium">
+              Chatbot
+            </Link>
           </li>
         </ul>
       </nav>
